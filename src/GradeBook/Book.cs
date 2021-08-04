@@ -30,20 +30,28 @@ namespace GradeBook
 
         public event AddGradeDelegate GradeAdded;
 
-        public Statistic GetGradeStats() {
+        public Statistic GetGradeStats()
+        {
             var result = new Statistic();
             result.Average = 0.0;
             result.High = double.MinValue;
-            result.Low= double.MaxValue;
+            result.Low = double.MaxValue;
 
             for (var index = 0; index < grades.Count; index += 1)
             {
                 result.Low = Math.Min(grades[index], result.Low);
                 result.High = Math.Max(grades[index], result.High);
-                result.Average  += grades[index];
+                result.Average += grades[index];
             }
-            result.Average  /= grades.Count;
+            result.Average /= grades.Count;
 
+            GetLetterGrade(result);
+
+            return result;
+        }
+
+        private static void GetLetterGrade(Statistic result)
+        {
             switch (result.Average)
             {
                 case var g when g >= 70.0:
@@ -62,9 +70,8 @@ namespace GradeBook
                     result.Letter = 'F';
                     break;
             }
-
-            return result;
         }
+
         public string name
         {
             get; private set;

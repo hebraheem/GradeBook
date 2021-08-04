@@ -8,15 +8,27 @@ namespace GradeBook
         static int count = 1;
         static void GradeBookList()
         {
-           var book = new Book("hebraheem book");
+            Book book = EnterBook();
+
+            var result = book.GetGradeStats();
+
+            Console.WriteLine($"the average grade is {result.Average:N3}");
+            Console.WriteLine($"the highest grade is {result.High}");
+            Console.WriteLine($"the lowest grade is {result.Low}");
+            Console.WriteLine($"the letter grade is {result.Letter}");
+        }
+
+        private static Book EnterBook()
+        {
+            var book = new Book("hebraheem book");
             book.GradeAdded += onGradedAdded;
 
             while (true)
             {
                 Console.WriteLine("Pls Enter a valid grade or q to quit");
-                var userInput =Console.ReadLine();
+                var userInput = Console.ReadLine();
 
-                if(userInput == "q")
+                if (userInput == "q")
                 {
                     break;
                 }
@@ -24,8 +36,8 @@ namespace GradeBook
                 {
                     try
                     {
-                       var userGrade = double.Parse(userInput);
-                        book.AddGrade(userGrade);  
+                        var userGrade = double.Parse(userInput);
+                        book.AddGrade(userGrade);
                     }
                     catch (ArgumentException ex)
                     {
@@ -35,16 +47,11 @@ namespace GradeBook
                     {
                         Console.WriteLine(ex.Message);
                     }
-                   
+
                 }
             }
-            
-            var result =book.GetGradeStats();
 
-            Console.WriteLine($"the average grade is {result.Average:N3}");
-            Console.WriteLine($"the highest grade is {result.High}");
-            Console.WriteLine($"the lowest grade is {result.Low}");
-            Console.WriteLine($"the letter grade is {result.Letter}");
+            return book;
         }
 
         static void onGradedAdded(object sender, EventArgs e)
