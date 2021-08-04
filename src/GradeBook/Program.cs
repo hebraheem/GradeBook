@@ -5,9 +5,11 @@ namespace GradeBook
 {
     class Program
     {
+        static int count = 1;
         static void GradeBookList()
         {
-           var book = new Book("hebraheem book");            
+           var book = new Book("hebraheem book");
+            book.GradeAdded += onGradedAdded;
 
             while (true)
             {
@@ -43,6 +45,11 @@ namespace GradeBook
             Console.WriteLine($"the highest grade is {result.High}");
             Console.WriteLine($"the lowest grade is {result.Low}");
             Console.WriteLine($"the letter grade is {result.Letter}");
+        }
+
+        static void onGradedAdded(object sender, EventArgs e)
+        {            
+            Console.WriteLine($"{count++} Grade Added");
         }
 
         static void Main(string[] args)

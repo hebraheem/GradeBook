@@ -1,8 +1,10 @@
+using System.Reflection.Metadata;
 using System.Collections.Generic;
 using System;
 
 namespace GradeBook 
 {
+    public delegate void AddGradeDelegate(object sender, EventArgs args);
     public class Book
     {
         public Book(string name)
@@ -15,11 +17,19 @@ namespace GradeBook
             if(grade <= 100 && grade > 0 )
             {
                 grades.Add(grade);
+                if(GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
+                
 
             } else {
                 throw new ArgumentException($"Invalid {nameof(grade)} value");
             }
         }
+
+        public event AddGradeDelegate GradeAdded;
+
         public Statistic GetGradeStats() {
             var result = new Statistic();
             result.Average = 0.0;
@@ -55,7 +65,10 @@ namespace GradeBook
 
             return result;
         }
-        private string name;
+        public string name
+        {
+            get; private set;
+        }
         private List<double> grades;
     }
 }
