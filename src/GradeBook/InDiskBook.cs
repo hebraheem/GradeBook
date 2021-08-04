@@ -5,7 +5,7 @@ using System.Net;
 
 namespace GradeBook
 {
-    internal class InDiskBook : Book, IBook
+    public class InDiskBook : Book, IBook
     {
         public InDiskBook(string name)
         {
