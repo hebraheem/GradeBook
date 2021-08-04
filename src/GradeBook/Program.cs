@@ -8,8 +8,10 @@ namespace GradeBook
         static int count = 1;
         static void Main(string[] args)
         {
-            IBook book = new InMemoryBook("hebraheem book");
+            IBook book = new InDiskBook("hebraheem book");
             book.GradeAdded += onGradedAdded;
+
+            // IBook diskBook = new InDiskBook("hebraheem book");
 
             EnterBook(book);
             var result = book.GetGradeStats();
@@ -20,21 +22,6 @@ namespace GradeBook
             Console.WriteLine($"the letter grade is {result.Letter}");
 
         }
-        // IBook book = new InMemoryBook("hebraheem book");
-        // book.GradeAdded += onGradedAdded
-        // static int count = 1;
-        // static void GradeBookList()
-        // {
-        //     InMemoryBook book = EnterBook(IBook book);
-
-            // var result = book.GetGradeStats();
-
-            // Console.WriteLine($"the average grade is {result.Average:N3}");
-            // Console.WriteLine($"the highest grade is {result.High}");
-            // Console.WriteLine($"the lowest grade is {result.Low}");
-            // Console.WriteLine($"the letter grade is {result.Letter}");
-        // }
-
         private static IBook EnterBook(IBook book)
         {
             while (true)
@@ -72,6 +59,4 @@ namespace GradeBook
             Console.WriteLine($"{count++} Grade Added");
         }
     }
-
- 
 }
