@@ -5,12 +5,19 @@ using System;
 namespace GradeBook 
 {
     public delegate void AddGradeDelegate(object sender, EventArgs args);
+     public interface IBook
+     {
+        void AddGrade(double grade);
+        event AddGradeDelegate GradeAdded;
+        Statistic GetGradeStats();
+        string name { get; }
 
+    }
     public abstract class  Book
     {
         public abstract void AddGrade(double grade);
     }
-    public class InMemoryBook : Book
+    public class InMemoryBook : Book, IBook
     {
         public InMemoryBook(string name)
         {
