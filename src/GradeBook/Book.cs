@@ -5,14 +5,19 @@ using System;
 namespace GradeBook 
 {
     public delegate void AddGradeDelegate(object sender, EventArgs args);
-    public class Book
+
+    public abstract class  Book
     {
-        public Book(string name)
+        public abstract void AddGrade(double grade);
+    }
+    public class InMemoryBook : Book
+    {
+        public InMemoryBook(string name)
         {
             grades = new List<double>();
             this.name = name;
         }
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             if(grade <= 100 && grade > 0 )
             {
@@ -71,7 +76,6 @@ namespace GradeBook
                     break;
             }
         }
-
         public string name
         {
             get; private set;

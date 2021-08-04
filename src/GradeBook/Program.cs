@@ -8,7 +8,7 @@ namespace GradeBook
         static int count = 1;
         static void GradeBookList()
         {
-            Book book = EnterBook();
+            InMemoryBook book = EnterBook();
 
             var result = book.GetGradeStats();
 
@@ -18,14 +18,14 @@ namespace GradeBook
             Console.WriteLine($"the letter grade is {result.Letter}");
         }
 
-        private static Book EnterBook()
+        private static InMemoryBook EnterBook()
         {
-            var book = new Book("hebraheem book");
+            var book = new InMemoryBook("hebraheem book");
             book.GradeAdded += onGradedAdded;
 
             while (true)
             {
-                Console.WriteLine("Pls Enter a valid grade or q to quit");
+                Console.WriteLine("Pls Enter a valid grade or q to compute grade");
                 var userInput = Console.ReadLine();
 
                 if (userInput == "q")
