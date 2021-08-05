@@ -44,7 +44,7 @@ namespace GradeBook
         {
             var result = new Statistic();
 
-            using(var reader = File.OpenText($"{name}.txt"))
+            using (var reader = File.OpenText($"{name}.txt"))
             {
                 var line = reader.ReadLine();
                 while (line != null)
@@ -54,7 +54,7 @@ namespace GradeBook
                     line = reader.ReadLine();
                 }
             }
-            
+
             return result;
         }
         private List<double> grades;
